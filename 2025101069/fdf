@@ -1,0 +1,30 @@
+    la t4,target
+    lw t4,0(t4)
+
+li t1,0
+addi t2,s1,-1
+
+search_loop:
+    add t3,t1,t2
+    slli t3,t3,1
+
+    t6
+    t6
+    lw t6,0(t6)
+
+right_sorted:
+    j search_loop
+check_range_left:
+    j search_loop
+go_right:
+    j search_loop
+left_sorted:
+    j search_loop
+check_range_right:
+    j search_loop
+go_left:
+    j search_loop
+found:
+    
+    j end
+not_found:

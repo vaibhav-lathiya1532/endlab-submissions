@@ -1,0 +1,53 @@
+li s3, 1 #index
+    ld t5, 0(s1) #start value
+    
+    identify_index: #loop to identify the index at which the loop has been rotated.
+        bge s3, s0, no_rotation
+        mv t0, s1
+        slli t1, s3, 3
+        add t0, t0, t1
+        ld t6, 0(t0)
+        blt t6, t5, identified
+        addi s3, s3, 1
+        mv t5, t6
+        j identify_index
+
+
+        identified:
+            mv t0, s1
+            slli t1, s3, 3
+            add t0, t0, t1
+            ld t5, 0(t0) #the identified index
+
+            mv t0, s1
+            addi t2, s0, -1
+            slli t1, t2, 3
+            add t0, t0, t1 
+            ld t6, 0(t0) #the last value. this is to check which subarray to do binary search in
+
+            blt s2, t6, second_right
+            j left_half
+            second_right:
+                bgt s2, t5, right_half
+                j left_half
+            
+
+        right_half:
+            mv t3, s3
+            addi t4, s0, -1
+            j binary_search
+        
+        left_half:
+            li t3, 0
+            addi t4, s3, -1
+            j binary_search
+        
+        no_rotation:
+            li t3, 0
+            addi t4, s0, -1
+            j binary_search
+
+        #la a0, left_right
+        #mv a1, t3
+        #mv a2, t4
+        #call printf
