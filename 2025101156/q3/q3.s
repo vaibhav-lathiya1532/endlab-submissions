@@ -1,7 +1,7 @@
 .data
 in: .string "%lld"
 out: .string "%lld"
-buffer: .space 106
+buffer: .space 800000
 .text
 .globl main
 main:
@@ -56,7 +56,7 @@ ld a3,24(sp)
 addi s2,a3,-1
 loop:
 beq s1,a3,exit
-beq a1,x0,zerocase
+beq s1,x0,zerocase
 addi t1,s1,-1
 slli t1,t1,3
 add t1,s0,t1
